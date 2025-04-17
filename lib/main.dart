@@ -1,13 +1,23 @@
 import 'package:dio/dio.dart';
 import 'package:fibo_ecco64/core/AppRouter/AppRouter.dart';
 import 'package:fibo_ecco64/features/home/presentation/manager/home_cubit.dart';
+import 'package:fibo_ecco64/features/search/presentation/manager/search_cubit.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(BlocProvider(
-      create: (_) => HomeCubit()..showTopHeadlines(), child: MyApp()));
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider(
+        create: (_) => HomeCubit()..showTopHeadlines(),
+      ),
+      BlocProvider(
+        create: (context) => SearchCubit(),
+      ),
+    ],
+    child: MyApp(),
+  ));
   //getTopHeadlines();
 }
 
@@ -27,6 +37,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

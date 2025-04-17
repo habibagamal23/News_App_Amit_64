@@ -10,6 +10,13 @@ class Homescreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(onPressed: (){
+            context.push(AppRouter.search);
+          }, icon: Icon(Icons.search))
+        ],
+      ),
       body: BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
         if (state is HomeLoading) {
           return CircularProgressIndicator();
@@ -22,10 +29,21 @@ class Homescreen extends StatelessWidget {
           return ListView.builder(
               itemCount: state.articleList.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(state.articleList[index].title ?? "no title"),
-                  subtitle: Text(
-                      state.articleList[index].description ?? "no description"),
+                return Card(
+                  color: Colors.grey,
+                  margin: EdgeInsets.all(10),
+                  elevation: 3,
+                  child: ListTile(
+                    onTap: (){
+                      context.push(AppRouter.detailes,
+                          extra:state.articleList[index] );
+                    },
+                    leading: state.articleList[index].urlToImage==null?Icon(Icons.person):
+                    Image.network(state.articleList[index].urlToImage!),
+                    title: Text(state.articleList[index].title ?? "no title"),
+                    subtitle: Text(
+                        state.articleList[index].description ?? "no description"),
+                  ),
                 );
               });
         }
