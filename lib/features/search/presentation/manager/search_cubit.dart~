@@ -7,8 +7,9 @@ import '../../data/repositories/searchRepo.dart';
 part 'search_state.dart';
 
 class SearchCubit extends Cubit<SearchState> {
-  SearchCubit(this.searchRepo) : super(SearchInitial());
-  SearchRepo searchRepo ;
+  SearchCubit() : super(SearchInitial());
+
+  SearchRepo searchRepo = SearchRepo();
   searchforArticl(String search)async{
     emit(SearchLoading());
     final result = await searchRepo.searchForarticales(search);

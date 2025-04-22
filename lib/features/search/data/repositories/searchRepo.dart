@@ -5,12 +5,12 @@ import 'package:fibo_ecco64/core/network/Dio/DioHelper.dart';
 import 'package:fibo_ecco64/features/home/data/models/ArticleModel.dart';
 
 class SearchRepo {
-  final ApiService = DioHelper();
-
+  ApiService apiService ;
+SearchRepo(this.apiService);
   Future<ApiResult<List<ArticleModel>>> searchForarticales(
       String search) async {
     try {
-      final data = await ApiService.get(ApiConstant.EndPointTopHeadlines,
+      final data = await apiService.get(ApiConstant.EndPointTopHeadlines,
           query: {"apiKey": ApiConstant.apiKey, "country": "us", "q": search});
       // data map{artical }
       final articals = data["articles"] as List;

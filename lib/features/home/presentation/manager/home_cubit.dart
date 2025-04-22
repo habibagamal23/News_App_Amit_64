@@ -6,9 +6,8 @@ import 'package:meta/meta.dart';
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(HomeInitial());
-
-  HomeRepo rep = HomeRepo();
+  HomeCubit(this.rep) : super(HomeInitial());
+  HomeRepo rep ;
 
   showTopHeadlines() async {
     emit(HomeLoading());
