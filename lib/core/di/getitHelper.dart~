@@ -14,7 +14,7 @@ void setUp() {
   getit.registerSingleton<HomeRepo>(HomeRepo(getit<ApiService>()));
   getit.registerSingleton<HomeCubit>(HomeCubit(getit<HomeRepo>()));
   // search objjects
-  getit.registerFactory<SearchRepo>(()=> SearchRepo(getit<ApiService>()));
+  getit.registerFactory<SearchRepo>(()=> SearchRepo(getit<ApiService>));
   getit.registerFactory<SearchCubit>(()=> SearchCubit(getit<SearchRepo>()));
 
 
